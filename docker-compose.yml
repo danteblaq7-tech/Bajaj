@@ -1,0 +1,23 @@
+# Local demo stack: PostgreSQL + API + dashboard on http://localhost:4000
+# Development mode: M-Pesa is mocked, SMS is printed in the logs, OTP code is 123456.
+# For production use NODE_ENV=production and set every secret listed in backend/.env.example.
+services:
+  db:
+    image: postgres:16-alpine
+    environment: { POSTGRES_PASSWORD: postgres, POSTGRES_DB: pwani_ride }
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U postgres"], interval: 3s, retries: 20 }
+  api:
+    build: { context: ., dockerfile: Dockerfile }
+    depends_on: { db: { condition: service_healthy } }
+    ports: ["4000:4000"]
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://postgres:postgres@db:5432/pwani_ride
+      OTP_DEV_CODE: "123456"
+      PUBLIC_URL: http://localhost:4000
+      UPLOAD_DIR: /data/uploads
+      FOOTAGE_DIR: /data/footage
+    volumes: [appdata:/data]
+    command: sh -c "node src/db/migrate.js && node src/db/seed.js && node src/server.js"
+volumes: { pgdata: {}, appdata: {} }

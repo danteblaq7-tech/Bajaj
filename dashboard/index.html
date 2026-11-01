@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pwani Ride Operations</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="anon">
+<div id="login">
+  <h1>Pwani Ride</h1>
+  <p class="mute">Operations sign in</p>
+  <div class="card">
+    <label for="em">Email</label><input id="em" type="email" autocomplete="username">
+    <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password">
+    <p id="lerr" role="alert" style="color:var(--bad)"></p>
+    <button id="lbtn" class="p" type="button">Sign in</button>
+  </div>
+</div>
+<nav aria-label="Main"><div class="logo">Pwani Ride</div>
+<a href="#overview">Overview</a><a href="#fleet">Fleet</a><a href="#drivers">Drivers</a><a href="#shifts">Shifts</a><a href="#revenue">Revenue</a><a href="#payouts">Payouts</a><a href="#footage">Footage</a><a href="#maintenance">Maintenance</a><a href="#incidents">Incidents</a>
+<button id="theme" type="button">Light / dark</button><button id="out" type="button">Sign out</button></nav>
+<main id="app" aria-live="polite"></main>
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="app.js"></script>
+</body></html>
